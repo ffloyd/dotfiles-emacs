@@ -31,7 +31,7 @@
   :init
   (setq recentf-max-saved-items 100)
   :config
-  (add-to-list 'recentf-exclude package-user-dir))
+  (add-to-list 'recentf-exclude (f-expand "straight" user-emacs-directory)))
 
 (use-package no-littering
   :after recentf
@@ -76,7 +76,7 @@
   :config (load-theme 'nord t))
 
 (use-package spaceline-config
-  :ensure spaceline
+  :straight spaceline
   :after evil
   :init (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
   :config (spaceline-spacemacs-theme))
@@ -192,7 +192,6 @@
 ;;
 
 (use-package helm
-  :ensure t
   :delight
   :init (progn
           (when (executable-find "curl")
@@ -339,11 +338,11 @@
 
 (use-package abbrev
   :delight
-  :ensure f)
+  :straight f)
 
 (use-package eldoc
   :delight
-  :ensure f)
+  :straight f)
 
 ;;
 ;; LSP stuff

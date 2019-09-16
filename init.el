@@ -61,6 +61,7 @@
 (add-to-list 'load-path
 	     my/modules-dir)
 (require 'core)
+(require 'lang-elixir)
 
 (server-start)
 

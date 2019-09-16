@@ -17,9 +17,9 @@
 ;; No ring bell
 (setq ring-bell-function 'ignore)
 
-;; Better splitting behaviour
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+;; Alternate splitting behaviour
+;; (setq split-height-threshold nil)
+;; (setq split-width-threshold 0)
 
 (use-package better-defaults
   :config

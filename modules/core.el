@@ -355,6 +355,11 @@
 (use-package lsp-ui
   :after lsp-mode)
 
+(use-package company-lsp
+  :after lsp-mode
+  :config
+  (push 'company-lsp company-backends))
+
 ;;
 ;; GIT
 ;;

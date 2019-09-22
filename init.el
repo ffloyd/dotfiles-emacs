@@ -62,6 +62,7 @@
 	     my/modules-dir)
 (require 'core)
 (require 'lang-elixir)
+(require 'lang-ruby)
 
 (server-start)
 

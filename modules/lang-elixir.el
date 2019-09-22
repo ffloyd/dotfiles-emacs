@@ -4,8 +4,7 @@
 
 (use-package elixir-mode
   :init
-  (add-to-list 'exec-path "~/Code/elixir-ls/release/")
-  (add-hook 'elixir-mode-hook #'lsp-mode))
+  (add-to-list 'exec-path "~/Code/elixir-ls/release/"))
 
 (provide 'lang-elixir)
 ;;; lang-elixir.el ends here

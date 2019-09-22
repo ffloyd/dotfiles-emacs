@@ -350,6 +350,7 @@
 
 (use-package lsp-mode
   :commands lsp
+  :hook (enh-ruby-mode elixir-mode)
   :config (require 'lsp-clients))
 
 (use-package lsp-ui

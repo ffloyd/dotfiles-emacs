@@ -318,8 +318,10 @@
   (company-active-map
    "M-n" nil
    "M-p" nil
-   "C-n" 'company-select-next-or-abort
-   "C-p" 'company-select-previous-or-abort))
+   "C-j" #'company-select-next
+   "C-k" #'company-select-previous
+   "C-n" #'company-select-next-or-abort
+   "C-p" #'company-select-previous-or-abort))
 
 (use-package flycheck
   :delight ;; spaceline already has stats to display flycheck stuff

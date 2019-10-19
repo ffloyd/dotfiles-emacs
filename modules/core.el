@@ -135,6 +135,7 @@
             (my/leader
               "a" '(:prefix-command spc-app-map :wk "App")
               "b" '(:prefix-command spc-buffer-map :wk "Buffer")
+              "e" '(:prefix-command spc-error-map :wk "Error")
               "f" '(:prefix-command spc-file-map :wk "File")
               "g" '(:prefix-command spc-git-map :wk "Git")
               "h" '(:prefix-command spc-help-map :wk "Help")
@@ -324,11 +325,18 @@
   :init
   (setq flycheck-emacs-lisp-load-path 'inherit)
   :config
-  (global-flycheck-mode))
-
-(use-package yafolding
-  :delight
-  :hook (prog-mode . yafolding-mode))
+  (global-flycheck-mode)
+  :general
+  (spc-error-map
+   "SPC" #'flycheck-mode
+   "b" #'flycheck-buffer
+   "l" #'flycheck-list-errors
+   "s" #'flycheck-select-checker
+   "d" #'flycheck-describe-checker
+   "v" #'flycheck-verify-setup
+   "x" #'flycheck-disable-checker
+   "n" #'flycheck-next-error
+   "p" #'flycheck-previous-error))
 
 (use-package yasnippet
   :delight yas-minor-mode

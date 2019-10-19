@@ -188,45 +188,44 @@
   "F" 'my/toggle-osx-fullscreen)
 
 ;;
-;; HELM
+;; Counsel/Ivy
 ;;
 
-(use-package helm
+(use-package ivy
   :delight
-  :init (progn
-          (when (executable-find "curl")
-            (setq helm-google-suggest-use-curl-p t))
-          (setq helm-split-window-inside-p t))
-  :config (progn
-            (require 'helm-config)
-            (helm-mode 1))
+  :init
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "(%d/%d) ")
+  :config
+  (ivy-mode 1)
   :general
-  ;; Emacs command overrides
-  ("C-c h"    'helm-command-prefix
-   "M-x"      'helm-M-x
-   "M-y"      'helm-show-kill-ring
-   "C-x b"    'helm-mini
-   "C-x C-f"  'helm-find-files
-   "C-s"      'helm-ff-run-grep)
-
-  ;; Helm bindings tuning
-  (helm-map
-   "TAB"   'helm-execute-persistent-action
-   "C-<tab>" 'helm-select-action
-   "C-j"   'helm-toggle-visible-mark)
-
-  ;; Add actions to SPC-maps
-  (my/leader
-    "SPC" 'helm-M-x)
-
+  (ivy-minibuffer-map
+   "C-j" #'ivy-next-line
+   "C-k" #'ivy-previous-line)
   (spc-buffer-map
-   "b" 'helm-mini)
+   "b" #'ivy-switch-buffer))
 
+(use-package ivy-hydra)
+
+(use-package counsel
+  :after ivy
+  :delight
+  :config
+  (counsel-mode 1)
+  :general
+  (my/leader
+    "SPC" #'counsel-M-x)
   (spc-file-map
-   "f" 'helm-find-files
-   "r" 'helm-recentf))
+   "f" #'counsel-find-file
+   "r" #'counsel-recentf)
+  (spc-search-map
+   "g" #'counsel-git-log))
 
-(use-package helm-ag)
+(use-package swiper
+  :after counsel
+  :general
+  (spc-search-map
+   "s" #'swiper))
 
 ;;
 ;; Projectile
@@ -237,13 +236,16 @@
   (setq projectile-mode-line-prefix " P")
   :config (projectile-mode +1))
 
-(use-package helm-projectile
+(use-package counsel-projectile
   :config
-  (helm-projectile-on)
+  (counsel-projectile-mode 1)
   :general
   (spc-project-map
-   "f" 'helm-projectile-find-file
-   "s" 'helm-projectile-ag))
+   "SPC" #'counsel-projectile
+   "b" #'counsel-projectile-switch-to-buffer
+   "f" #'counsel-projectile-find-file
+   "w" #'counsel-projectile-switch-project
+   "s" #'counsel-projectile-rg))
 
 ;;
 ;; Treemacs

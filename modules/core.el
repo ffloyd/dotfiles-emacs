@@ -294,11 +294,12 @@
   (electric-pair-mode))
 
 (use-package display-line-numbers
+  :straight f
   :init
   (setq display-line-numbers-type 'relative)
   :general
   (spc-toggle-map
-   "n" 'display-line-numbers))
+   "n" #'display-line-numbers-mode))
 
 ;;
 ;; prog-mode related

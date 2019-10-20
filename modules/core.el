@@ -17,6 +17,9 @@
 ;; No ring bell
 (setq ring-bell-function 'ignore)
 
+;; No lock files
+(setq create-lockfiles nil)
+
 ;; Alternate splitting behaviour
 ;; (setq split-height-threshold nil)
 ;; (setq split-width-threshold 0)

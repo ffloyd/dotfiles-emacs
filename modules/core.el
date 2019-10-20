@@ -195,8 +195,15 @@
 ;; Counsel/Ivy
 ;;
 
+(use-package smex
+  :init
+  (setq smex-save-file (no-littering-expand-var-file-name "smex"))
+  :config
+  (smex-initialize))
+
 (use-package ivy
   :delight
+  :after smex
   :init
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) ")
@@ -207,7 +214,9 @@
    "C-j" #'ivy-next-line
    "C-k" #'ivy-previous-line)
   (spc-buffer-map
-   "b" #'ivy-switch-buffer))
+   "b" #'ivy-switch-buffer)
+  (spc-search-map
+   "r" #'ivy-resume))
 
 (use-package ivy-hydra)
 
@@ -237,7 +246,8 @@
 
 (use-package projectile
   :init
-  (setq projectile-mode-line-prefix " P")
+  (setq projectile-mode-line-prefix " P"
+        projectile-completion-system "ivy")
   :config (projectile-mode +1))
 
 (use-package counsel-projectile

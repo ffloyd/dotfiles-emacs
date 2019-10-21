@@ -63,6 +63,7 @@
 (require 'core)
 (require 'lang-elixir)
 (require 'lang-ruby)
+(require 'lang-other)
 
 (server-start)
 

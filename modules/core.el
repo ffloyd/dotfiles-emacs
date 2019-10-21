@@ -164,8 +164,8 @@
 (general-def spc-buffer-map
   "p" 'previous-buffer
   "n" 'next-buffer
-  "k" 'kill-this-buffer
-  "K" 'my/kill-other-buffers)
+  "d" 'kill-this-buffer
+  "C-d" 'my/kill-other-buffers)
 
 (use-package winum
   :init (setq winum-auto-setup-mode-line nil)
@@ -216,7 +216,10 @@
   (spc-buffer-map
    "b" #'ivy-switch-buffer)
   (spc-search-map
-   "r" #'ivy-resume))
+   "r" #'ivy-resume)
+  (ivy-switch-buffer-map
+   "C-k" #'ivy-previous-line
+   "C-d" #'ivy-switch-buffer-kill))
 
 (use-package ivy-hydra)
 

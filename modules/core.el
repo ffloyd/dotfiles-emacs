@@ -37,7 +37,6 @@
   (add-to-list 'recentf-exclude (f-expand "straight" user-emacs-directory)))
 
 (use-package no-littering
-  :after recentf
   :config
   (add-to-list 'recentf-exclude no-littering-etc-directory)
   (add-to-list 'recentf-exclude no-littering-var-directory)
@@ -80,7 +79,6 @@
 
 (use-package spaceline-config
   :straight spaceline
-  :after evil
   :init (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
   :config (spaceline-spacemacs-theme))
 
@@ -101,11 +99,11 @@
          evil-want-fine-undo t)
   :config (evil-mode 1))
 
-(use-package evil-collection
-  :after evil
-  :init (setq
-         evil-collection-mode-list '())
-  :config (evil-collection-init))
+;; (use-package evil-collection
+;;  :after evil
+;;  :init (setq
+;;         evil-collection-mode-list '())
+;;  :config (evil-collection-init))
 
 (use-package general
   :after evil
@@ -169,6 +167,7 @@
   "C-d" 'my/kill-other-buffers)
 
 (use-package winum
+  :demand t
   :init (setq winum-auto-setup-mode-line nil)
   :config (winum-mode)
   :general
@@ -204,7 +203,7 @@
 
 (use-package ivy
   :delight
-  :after smex
+  :demand t
   :init
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) ")
@@ -222,10 +221,11 @@
    "C-k" #'ivy-previous-line
    "C-d" #'ivy-switch-buffer-kill))
 
-(use-package ivy-hydra)
+(use-package ivy-hydra
+  :demand t)
 
 (use-package counsel
-  :after ivy
+  :demand t
   :delight
   :config
   (counsel-mode 1)
@@ -239,7 +239,7 @@
    "g" #'counsel-git-log))
 
 (use-package swiper
-  :after counsel
+  :demand t
   :general
   (spc-search-map
    "s" #'swiper))
@@ -270,6 +270,7 @@
 ;;
 
 (use-package treemacs
+  :demand t
   :init
   (setq treemacs-persist-file (expand-file-name "var/treemacs/persist" user-emacs-directory)
         treemacs-follow-after-init t)
@@ -279,24 +280,19 @@
   (spc-file-map
    "t" #'treemacs))
 
-(use-package treemacs-evil
-  :after treemacs)
-
-(use-package treemacs-projectile
-  :after treemacs projectile)
+(use-package treemacs-evil)
+(use-package treemacs-projectile)
+(use-package treemacs-magit)
 
 (use-package treemacs-icons-dired
-  :after treemacs dired
   :config (treemacs-icons-dired-mode))
-
-(use-package treemacs-magit
-  :after treemacs magit)
 
 ;;
 ;; Common editing
 ;;
 
 (use-package undo-tree
+  :demand t
   :delight
   :init
   (setq undo-tree-visualizer-diff t)
@@ -342,6 +338,7 @@
    "C-p" #'company-select-previous-or-abort))
 
 (use-package flycheck
+  :demand t
   :delight ;; spaceline already has stats to display flycheck stuff
   :init
   (setq flycheck-emacs-lisp-load-path 'inherit)
@@ -364,8 +361,7 @@
   :config (yas-reload-all)
   :hook (prog-mode . yas-minor-mode))
 
-(use-package evil-matchit
-  :after evil)
+(use-package evil-matchit)
 
 (use-package abbrev
   :delight
@@ -374,43 +370,6 @@
 (use-package eldoc
   :delight
   :straight f)
-
-;;
-;; LSP stuff
-;;
-
-(use-package lsp-mode
-  :init
-  (setq lsp-prefer-flymake nil)
-  :config
-  (add-hook 'elixir-mode-hook #'lsp))
-
-(use-package lsp-ui
-  :after lsp-mode flycheck
-  :hook (lsp-mode . lsp-ui-mode)
-  :init
-  (setq lsp-ui-doc-enable nil
-        lsp-ui-doc-use-childframe t
-        lsp-ui-doc-position 'top
-        lsp-ui-doc-include-signature t
-        lsp-ui-sideline-enable nil
-        lsp-ui-flycheck-enable t
-        lsp-ui-flycheck-list-position 'bottom
-        lsp-ui-flycheck-live-reporting t
-        lsp-ui-peek-enable t)
-  :general
-  (spc-lang-map
-   "a" #'lsp-execute-code-action
-   "g" #'lsp-goto-implementation))
-
-(use-package company-lsp
-  :after company lsp-mode
-  :init
-  (setq company-transformers nil
-        company-lsp-async t
-        company-lsp-cache-candidates nil)
-  :config
-  (push 'company-lsp company-backends))
 
 ;;
 ;; GIT
@@ -422,10 +381,6 @@
    "s" 'magit-status))
 
 (use-package evil-magit)
-
-(use-package gitignore-mode)
-(use-package gitconfig-mode)
-(use-package gitattributes-mode)
 
 (provide 'core)
 ;;; core.el ends here

@@ -3,7 +3,7 @@
 ;; Copyright (c) 2018-2018 Roman Kolesnev
 ;;
 ;; Author: Roman Kolesnev <rvkolesnev@gmail.com>
-;; URL: https://github.com/ffloyd/.emacs.d
+;; URL: https://github.com/ffloyd/dotfiles-emacs
 ;; Version: 0.0.1
 
 ;;; Commentary:
@@ -64,6 +64,7 @@
 (require 'lang-elixir)
 (require 'lang-ruby)
 (require 'lang-other)
+(require 'tool-lsp)
 
 (server-start)
 

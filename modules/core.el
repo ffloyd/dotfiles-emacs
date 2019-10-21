@@ -142,6 +142,7 @@
               "f" '(:prefix-command spc-file-map :wk "File")
               "g" '(:prefix-command spc-git-map :wk "Git")
               "h" '(:prefix-command spc-help-map :wk "Help")
+              "l" '(:prefix-command spc-lang-map :wk "Lang")
               "p" '(:prefix-command spc-project-map :wk "Project")
               "s" '(:prefix-command spc-search-map :wk "Search")
               "t" '(:prefix-command spc-toggle-map :wk "Toggle"))))
@@ -328,8 +329,9 @@
   :delight
   :hook (prog-mode . company-mode)
   :init
-  (setq company-tooltip-align-annotations t)
-  (setq company-minimum-prefix-length 1)
+  (setq company-tooltip-align-annotations t
+        company-minimum-prefix-length 1
+        company-idle-delay 0.3)
   :general
   (company-active-map
    "M-n" nil
@@ -378,15 +380,35 @@
 ;;
 
 (use-package lsp-mode
-  :commands lsp
-  :hook (enh-ruby-mode elixir-mode)
-  :config (require 'lsp-clients))
+  :init
+  (setq lsp-prefer-flymake nil)
+  :config
+  (add-hook 'elixir-mode-hook #'lsp))
 
 (use-package lsp-ui
-  :after lsp-mode)
+  :after lsp-mode flycheck
+  :hook (lsp-mode . lsp-ui-mode)
+  :init
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-doc-use-childframe t
+        lsp-ui-doc-position 'top
+        lsp-ui-doc-include-signature t
+        lsp-ui-sideline-enable nil
+        lsp-ui-flycheck-enable t
+        lsp-ui-flycheck-list-position 'bottom
+        lsp-ui-flycheck-live-reporting t
+        lsp-ui-peek-enable t)
+  :general
+  (spc-lang-map
+   "a" #'lsp-execute-code-action
+   "g" #'lsp-goto-implementation))
 
 (use-package company-lsp
-  :after lsp-mode
+  :after company lsp-mode
+  :init
+  (setq company-transformers nil
+        company-lsp-async t
+        company-lsp-cache-candidates nil)
   :config
   (push 'company-lsp company-backends))
 

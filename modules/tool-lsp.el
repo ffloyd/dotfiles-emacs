@@ -23,7 +23,21 @@
   :general
   (spc-lang-map
    "a" #'lsp-execute-code-action
-   "g" #'lsp-goto-implementation))
+   "f" '(:prefix-command spc-lang-find-map :wk "Find")
+   "g" '(:prefix-command spc-lang-goto-map :wk "Goto")
+   "E" #'lsp-eldoc-enable-hover
+   "e" #'lsp-ui-flycheck-list
+   "=" #'lsp-format-buffer
+   "i" #'lsp-ui-imenu)
+  (spc-lang-goto-map
+   "i" #'lsp-goto-implementation
+   "t" #'lsp-goto-type-definition)
+  (spc-lang-find-map
+   "i" #'lsp-find-implementation
+   "D" #'lsp-find-declaration
+   "d" #'lsp-find-definition
+   "t" #'lsp-find-type-definition
+   "r" #'lsp-find-references))
 
 (use-package company-lsp
   :init

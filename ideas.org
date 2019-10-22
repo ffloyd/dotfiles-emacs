@@ -1,0 +1,10 @@
+* Emacs configuration ideas
+
+  * [ ] make linter work on init files without hakery like ~(defvar something)~
+    * creating ~a-common.el~ with ~require~'s of the all wide-used packeges may help
+    * additional helpers from ~general.el~ (~:ghook~, ~:gfhook~, ~general-setq~) may help reduce linter warnings
+    * DoD:
+      * 0 warnings when linting files
+      * lefthook pre-commit linter check
+      * optional: Github action
+  * [ ] make LSP menu present only when LSP mode is enabled

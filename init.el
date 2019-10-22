@@ -60,10 +60,14 @@
 
 (add-to-list 'load-path
 	     my/modules-dir)
+
 (require 'core)
+
 (require 'lang-elixir)
 (require 'lang-ruby)
+(require 'lang-markdown)
 (require 'lang-other)
+
 (require 'tool-lsp)
 
 (server-start)

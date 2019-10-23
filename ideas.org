@@ -8,3 +8,11 @@
       * lefthook pre-commit linter check
       * optional: Github action
   * [ ] make LSP menu present only when LSP mode is enabled
+  * [ ] integrte reliable folding solution
+    * should work for:
+      * Ruby
+      * Elixir
+      * JS/TS
+      * Markdown
+  * [ ] typesript / TSX support
+    * test on SchedQL repo
